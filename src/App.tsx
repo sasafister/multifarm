@@ -1,23 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { dataAPR, dataTVL, options } from './utils/dataset';
+import Asset from './components/Asset';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+        <p className='title'>
+          Multifarm Demo
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Asset />
+        <div className='charts'>
+          <Line className='table' options={options('Asset APR (y)')} data={dataAPR} /> 
+          <Line className='table' options={options('Asset TVL')} data={dataTVL} />
+        </div>
       </header>
     </div>
   );
